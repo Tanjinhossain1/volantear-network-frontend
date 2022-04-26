@@ -2,6 +2,28 @@
   text-align: center;
 }
 
+/* volunteers */
+.volunteer-contain {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  margin-bottom: 0;
+  right: 0px;
+
+  padding: 30px 0px 40px 0px;
+  
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+/* volunteers */
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -32,6 +54,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
