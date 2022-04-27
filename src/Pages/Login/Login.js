@@ -17,6 +17,10 @@ const Login = () => {
         </div>
         )
     }
+    
+    if(user){
+
+    }
 
     return (
         <div>

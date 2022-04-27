@@ -1,22 +1,42 @@
 .App {
   text-align: center;
 }
-
+/* checkout */
+.checkout{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+/* checkout */
 /* volunteers */
 .volunteer-contain {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-
+.bg-color-extra{
+  background-color: white;
+  margin-right: 20px;
+  height: 680px;
+}
+.bg-color{
+  height: 680px;
+  padding: 0px 100px 100px 0px;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+.bg-color input{
+  width: 400px;
+}
+.bg-color textarea{
+  width: 400px;
+}
 .bottom-left {
   position: absolute;
   bottom: 0px;
   left: 0px;
   margin-bottom: 0;
   right: 0px;
-
+  cursor: pointer;
   padding: 30px 0px 40px 0px;
-  
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
 }
