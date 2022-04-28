@@ -1,7 +1,11 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Event = () => {
+    const [user] = useAuthState(auth);
+    console.log(user)
     const createVolunteer = (event) => {
         event.preventDefault();
         const name = event.target.title.value;
@@ -9,9 +13,11 @@ const Event = () => {
         const date = event.target.date.value;
         const img = event.target.imgUrl.value;
         const volunteerInfo = { name, img, description, date }
-        fetch('https://shielded-falls-41876.herokuapp.com/addVolunteer', {
+        // https://shielded-falls-41876.herokuapp.com/
+        fetch('http://localhost:5000/addVolunteer', {
             method: 'POST',
             headers: {
+                'authorization':`${user?.email} ${localStorage.getItem('accessToken')}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(volunteerInfo),

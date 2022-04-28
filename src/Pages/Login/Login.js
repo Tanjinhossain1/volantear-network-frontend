@@ -25,10 +25,22 @@ const Login = () => {
             </div>
         )
     }
+    console.log(user,googleUser)
 
     let from = location.state?.from?.pathname || "/";
     if (googleUser || user) {
-        navigate(from)
+        const url = 'http://localhost:5000/login';
+        fetch(url,{
+            method:'POST',
+            headers:{'content-type':'application/json'},
+            body: JSON.stringify({email: user?.user?.email||googleUser?.user?.email})
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            localStorage.setItem('accessToken',data.token)
+            navigate(from)
+        })
     }
     const handleSubmit = (event) => {
         event.preventDefault();
