@@ -1,16 +1,22 @@
 import React from 'react';
 import auth from '../../firebase.init';
 import headerLogo from '../../logos/Group 1329.png';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Spinner } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
     const location = useLocation()
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const navigate = useNavigate()
-    if (loading) {
+    if (googleLoading) {
         return (
             <div className='text-center mt-5'>
                 <Spinner animation="border" role="status">
@@ -21,10 +27,15 @@ const Login = () => {
     }
 
     let from = location.state?.from?.pathname || "/";
-    if (user) {
+    if (googleUser || user) {
         navigate(from)
     }
-
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        signInWithEmailAndPassword(email, password)
+    }
     return (
         <div>
             <div className='text-center'>
@@ -33,7 +44,7 @@ const Login = () => {
                 </div>
                 <div className='mt-3 py-5 rounded-3 border w-50 mx-auto'>
                     <h2>Login With</h2>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <input className='w-75 p-1' type="email" name="email" placeholder='Email' required id="" />
                         <input type="password" className='w-75 p-1 my-2' name='password' placeholder='PassWord' required />
                         <br />

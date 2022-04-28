@@ -2,6 +2,7 @@ import React from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Navigate, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 
 const RequireAuth = ({children}) => {
@@ -15,6 +16,9 @@ const RequireAuth = ({children}) => {
                 </Spinner>
             </div>
         )
+    }
+    if(user?.emailVerified){
+       toast('true')
     }
     if (!user) {
         return <Navigate to="/login" state={{ from: location }} replace />;
