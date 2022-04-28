@@ -11,6 +11,7 @@ import Admin from './Pages/Admin/Admin';
 import Event from './Pages/Event/Event';
 import RequireAuth from './Pages/RequireAuth/RequireAuth';
 import Blog from './Pages/Blog/Blog';
+import SignUp from './SignUp/SignUp';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/signup' element={<SignUp></SignUp>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/blog' element={<Blog></Blog>}></Route>

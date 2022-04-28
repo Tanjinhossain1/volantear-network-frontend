@@ -14,7 +14,7 @@ const Volunteer = ({ volunteer, volunteers, setVolunteers }) => {
         if (confirmDeletes) {
             const confirmDelete = window.confirm('Are you sure to delete');
             if (confirmDelete) {
-                fetch(`http://localhost:5000/volunteer/${id}`, {
+                fetch(`https://shielded-falls-41876.herokuapp.com/volunteer/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import useNewVolunteer from '../../hooks/useNewVolunteer';
 
 const Checkout = () => {
@@ -6,23 +7,32 @@ const Checkout = () => {
 
     // const { id } = useParams();
     useEffect(() => {
-        fetch(`http://localhost:5000/checkVolunteer`)
+        fetch(`https://shielded-falls-41876.herokuapp.com/checkVolunteer`)
             .then(res => res.json())
             .then(data => setVolunteerCheck(data))
     }, [])
 
     const deleteVolunteer = (id) => {
-        // const confirmDelete = window.confirm('Are You Sure To Delete');
-        // if (confirmDelete) {
-            fetch(`http://localhost:5000/checkVolunteer/${id}`, {
-                method: 'DELETE'
+        const confirmDelete = window.confirm('Are You Sure To Delete');
+        if (confirmDelete) {
+        fetch(`https://shielded-falls-41876.herokuapp.com/checkVolunteer/${id}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(take => {
+                const remaining = volunteerCheck.filter(v => v._id !== id);
+                setVolunteerCheck(remaining)
             })
-                .then(response => response.json())
-                .then(take => {
-                    const remaining = volunteerCheck.filter(v => v._id !== id);
-                    setVolunteerCheck(remaining)
-                })
-        // }
+        }
+    }
+    if (volunteerCheck.length === 0) {
+        return (
+            <div className='text-center mt-5'>
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden "></span>
+                </Spinner>
+            </div>
+        )
     }
     return (
         <div className='checkout m-5 '>
@@ -39,11 +49,13 @@ const ShowVolunteer = ({ volunteer, deleteVolunteer }) => {
 
     if (name && img) {
         return (
-            <div className='m-5 d-flex align-items-center'>
-                <img className='w-25' src={img} alt="" />
+            <div className='m-5 also-check align-items-center'>
+                <img className='w-50' src={img} alt="" />
                 <div>
-                    <h5 className='mx-2'>{name}</h5>
-                    <p className='mx-2'>{date}</p>
+                    <div>
+                        <h5 className='mx-2'>{name}</h5>
+                        <p className='mx-2'>{date}</p>
+                    </div>
                     <div className='text-end'>
                         <button onClick={() => deleteVolunteer(_id)} className='btn btn-light'>Cancel</button>
                     </div>

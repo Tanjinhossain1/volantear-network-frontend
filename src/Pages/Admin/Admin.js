@@ -9,15 +9,15 @@ const Admin = () => {
         return (
             <div className='text-center mt-5'>
                 <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-        </Spinner>
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
             </div>
         )
     }
     const deleteVolunteer = (id) => {
         const confirmDelete = window.confirm('Are You Sure To Delete');
         if (confirmDelete) {
-            fetch(`http://localhost:5000/newVolunteer/${id}`, {
+            fetch(`https://shielded-falls-41876.herokuapp.com/newVolunteer/${id}`, {
                 method: 'DELETE'
             })
                 .then(response => response.json())
@@ -28,7 +28,7 @@ const Admin = () => {
         }
     }
     return (
-        <div className='w-75 mx-auto mt-5'>
+        <div className='w-75 response mx-auto mt-5'>
             <Table striped bordered hover>
                 <thead>
 
@@ -63,34 +63,5 @@ const Admin = () => {
         </div >
     );
 };
-const Volunteer = ({ volunteer, deleteVolunteer }) => {
-    const { name, _id, date, books, email } = volunteer;
-    return (
-        <div>
-            {/* <Table striped bordered hover> */}
-            {/* <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email ID</th>
-                        <th>Registating Date</th>
-                        <th>Volunteer List</th>
-                        <th>Action</th>
-                    </tr>
-                </thead> */}
-            {/* <tbody> */}
-            {/* <tr className=''> */}
-            {/* <td>{name}</td>
-            <td>{email}</td>
-            <td>{date}</td>
-            <td>{books}</td> */}
-            {/* <td className='text-center bg-danger' onClick={() => deleteVolunteer(_id)}>
-                <TrashIcon width={50} className="text-white" />
-            </td> */}
-            {/* </tr>
-                </tbody>
-            </Table> */}
-        </div>
-    )
-}
 
 export default Admin;
